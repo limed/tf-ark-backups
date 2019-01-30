@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   backup_bucket = "${var.bucket_name}-${var.cluster_name}-${data.aws_caller_identity.current.account_id}"
-  backup_user   = "${var.backup_user}-${var.backup_user}"
+  backup_user   = "${var.backup_user}-${var.cluster_name}"
 }
 
 resource "aws_s3_bucket" "backup_bucket" {
@@ -42,7 +42,7 @@ data "template_file" "policy" {
 }
 
 resource "aws_iam_user_policy" "backup_user_policy" {
-  name = "${local.backup_user}-backup-policy"
+  name = "${local.backup_user}-policy"
   user = "${aws_iam_user.backup_user.name}"
 
   policy = "${data.template_file.policy.rendered}"
