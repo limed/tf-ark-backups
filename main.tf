@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 locals {
-  backup_bucket = "${var.bucket_name}-${var.cluster_name}-${data.aws_caller_identity.account_id}"
+  backup_bucket = "${var.bucket_name}-${var.cluster_name}-${data.aws_caller_identity.current.account_id}"
   backup_user   = "${var.backup_user}-${var.backup_user}"
 }
 
