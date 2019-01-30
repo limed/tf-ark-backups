@@ -19,7 +19,7 @@ resource "aws_s3_bucket" "backup_bucket" {
 }
 
 resource "aws_iam_user" "backup_user" {
-  user = "${local.backup_user}"
+  name = "${local.backup_user}"
 
   tags = {
     Name      = "${local.backup_user}"
